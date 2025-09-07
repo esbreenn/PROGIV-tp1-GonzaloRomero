@@ -1,0 +1,41 @@
+@url=http://localhost:3000
+
+### Crear tarea pendiente
+POST {{url}}/tareas
+Content-Type: application/json
+
+{ "nombre": "Hacer TP de programacion", "completada": false }
+
+### Crear tarea completada
+POST {{url}}/tareas
+Content-Type: application/json
+
+{ "nombre": "Sacar la basura", "completada": true }
+
+### Crear otra tarea pendiente
+POST {{url}}/tareas
+Content-Type: application/json
+
+{ "nombre": "Estudiar Express", "completada": false }
+
+### ERROR: duplicado por nombre (case-insensitive -> 409)
+POST {{url}}/tareas
+Content-Type: application/json
+
+{ "nombre": "Hacer TP de programacion", "completada": true }
+
+### Listar todas
+GET {{url}}/tareas
+
+### Filtrar por estado = completadas
+GET {{url}}/tareas?estado=completadas
+
+### Filtrar por estado = pendientes
+GET {{url}}/tareas?estado=pendientes
+
+
+### Borrar UNA tarea por nombre
+DELETE {{url}}/tareas?nombre=Estudiar Express
+
+### Borrar todas
+DELETE {{url}}/tareas
