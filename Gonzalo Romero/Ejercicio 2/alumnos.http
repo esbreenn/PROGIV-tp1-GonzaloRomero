@@ -1,64 +1,36 @@
 @url=http://localhost:3000
 
-### Crear alumno (promocionado)
+### Crear alumno (válido)
 POST {{url}}/alumnos
 Content-Type: application/json
 
-{ "nombre": "Pablo", "nota1": 9, "nota2": 9, "nota3": 8 }
+{ "nombre": "Ana", "nota1": 7, "nota2": 8, "nota3": 9 }
 
-### Crear alumno (aprobado)
-POST {{url}}/alumnos
-Content-Type: application/json
-
-{ "nombre": "Ana", "nota1": 6, "nota2": 7, "nota3": 6 }
-
-### Crear alumno (reprobado)
-POST {{url}}/alumnos
-Content-Type: application/json
-
-{ "nombre": "Matias", "nota1": 5, "nota2": 4, "nota3": 3 }
-
-### Crear alumno con límite inferior (0)
-POST {{url}}/alumnos
-Content-Type: application/json
-
-{ "nombre": "Diego", "nota1": 0, "nota2": 0, "nota3": 0 }
-
-### Crear alumno con límite superior (10)
-POST {{url}}/alumnos
-Content-Type: application/json
-
-{ "nombre": "Eva", "nota1": 10, "nota2": 10, "nota3": 10 }
-
-### ERROR: duplicado por nombre (case-insensitive -> 409)
+### ERROR: duplicado por nombre (case-insensitive)
 POST {{url}}/alumnos
 Content-Type: application/json
 
 { "nombre": "ana", "nota1": 6, "nota2": 6, "nota3": 6 }
 
-### Listar todos
-GET {{url}}/alumnos
-
-### Filtrar por estado = promocionado
-GET {{url}}/alumnos?estado=promocionado
-
-### Filtrar por estado = aprobado
-GET {{url}}/alumnos?estado=aprobado
-
-### Filtrar por estado = reprobado
-GET {{url}}/alumnos?estado=reprobado
-
 ### Detalle por id (1)
 GET {{url}}/alumnos/1
 
-### Reemplazar por id
+### Reemplazar por id (PUT) - mantener nombre, cambiar notas
 PUT {{url}}/alumnos/1
 Content-Type: application/json
 
-{ "nombre": "Gonzalo", "nota1": 10, "nota2": 0, "nota3": 10 }
+{ "nombre": "Ana", "nota1": 10, "nota2": 0, "nota3": 10 }
 
-### Borrar por id
-DELETE {{url}}/alumnos/2
+# ---- Errores de rango 0..10 ----
 
-### Limpiar todos
-DELETE {{url}}/alumnos
+### ERROR: nota > 10
+POST {{url}}/alumnos
+Content-Type: application/json
+
+{ "nombre": "Bruno", "nota1": 11, "nota2": 7, "nota3": 8 }
+
+### ERROR: nota < 0
+POST {{url}}/alumnos
+Content-Type: application/json
+
+{ "nombre": "Carla", "nota1": -1, "nota2": 5, "nota3": 6 }
