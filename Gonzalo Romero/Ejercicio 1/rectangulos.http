@@ -1,68 +1,16 @@
 @url=http://localhost:3000
 
-### Crear rectángulo (cuadrado)
-POST {{url}}/rectangulos
+### Crear (cuadrado)
+POST {{url}}/calculos
 Content-Type: application/json
 
 { "base": 5, "altura": 5 }
 
-### Crear rectángulo (no cuadrado)
-POST {{url}}/rectangulos
+### Crear (rectángulo)
+POST {{url}}/calculos
 Content-Type: application/json
 
 { "base": 3.5, "altura": 7 }
 
-### Listar todos
+### Listar cálculos (incluye tipo al vuelo)
 GET {{url}}/calculos
-
-### Filtrar solo cuadrados
-GET {{url}}/calculos?tipo=cuadrado
-
-### Filtrar solo rectangulos
-GET {{url}}/calculos?tipo=rectangulo
-
-### Obtener por id (1)
-GET {{url}}/calculos/1
-
-### Reemplazar por id (PUT) - dejar como cuadrado
-PUT {{url}}/calculos/1
-Content-Type: application/json
-
-{ "base": 8, "altura": 8 }
-
-### Reemplazar por id  - dejar como rectángulo
-PUT {{url}}/calculos/2
-Content-Type: application/json
-
-{ "base": 10, "altura": 6 }
-
-### Borrar por id
-DELETE {{url}}/calculos/1
-
-### Limpiar todo
-DELETE {{url}}/calculos
-
-
-
-# ---- Casos de error ----
-
-### ERROR: id inválido (no entero positivo)
-GET {{url}}/calculos/-3
-
-### ERROR: body con campos extra (debe fallar)
-POST {{url}}/rectangulos
-Content-Type: application/json
-
-{ "base": 4, "altura": 4, "extra": 1 }
-
-### ERROR: body con valores no numéricos
-POST {{url}}/rectangulos
-Content-Type: application/json
-
-{ "base": "x", "altura": 2 }
-
-### ERROR: body con valores negativos
-POST {{url}}/rectangulos
-Content-Type: application/json
-
-{ "base": -5, "altura": 3 }
